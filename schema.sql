@@ -5,6 +5,11 @@ CREATE TABLE customers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
+
+
+
 CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     customer_id INTEGER REFERENCES customers(id),
@@ -13,6 +18,11 @@ CREATE TABLE orders (
     shipping_address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+
+
 
 CREATE TABLE order_item (
     id SERIAL PRIMARY KEY,
@@ -24,3 +34,32 @@ CREATE TABLE order_item (
 
 
 
+
+ 
+
+CREATE OR REPLACE FUNCTION search_orders(
+    p_customer_id INT DEFAULT NULL,
+    p_min_amount DECIMAL DEFAULT NULL,
+    p_status VARCHAR DEFAULT NULL
+)
+RETURNS TABLE (
+    order_id INT,
+    customer_id INT,
+    total_amount DECIMAL,
+    status VARCHAR
+)
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        o.id,
+        o.customer_id,
+        o.total_amount,
+        o.status
+    FROM orders o
+    WHERE
+        (p_customer_id IS NULL OR o.customer_id = p_customer_id)
+        AND (p_min_amount IS NULL OR o.total_amount >= p_min_amount)
+        AND (p_status IS NULL OR o.status = p_status);
+END;
+$$ LANGUAGE plpgsql;
