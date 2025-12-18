@@ -22,14 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-
-    'rest_framework',
-    'rest_framework_simplejwt',
-    "corsheaders",
-
-    'users',
-    'customer',
+    'analytics',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +53,25 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project.wsgi.application'
+
+
+
+
+
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ecommerce',
+        'USER': 'armiyah',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 
 
 
@@ -101,9 +113,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
-
-AUTH_USER_MODEL = 'users.User'
-AUTH_PROFILE_MODULE = 'users.User'
 
 
 
