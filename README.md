@@ -18,7 +18,18 @@
     - python manage.py runserver
 
 7. Use postman to test API
-    - http://127.0.0.1:8000/api/customers/recent-top-spenders for recent top spenders
-    - http://127.0.0.1:8000/api/orders/search for search orders
-    - http://127.0.0.1:8000/api/reports/generate for generate reports
+    - Select GET method, http://127.0.0.1:8000/api/customers/recent-top-spenders for recent top spenders
+    - Select GET method, http://127.0.0.1:8000/api/orders/search for search orders
+    - Select POST method, http://127.0.0.1:8000/api/reports/generate for generate reports\
+        1️⃣ Click Body tab
+        2️⃣ Select raw
+        3️⃣ Select JSON (right dropdown)
+        - input the json like this: 
+            {
+                "view_name": "sales_overview",
+                "filters": [
+                    { "field": "region", "op": "eq", "value": "Kochi" }
+                ]
+            }
+
 
