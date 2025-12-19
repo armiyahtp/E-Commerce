@@ -127,6 +127,15 @@ def generate_report(request):
         elif operator == "gt":
             sql += f" AND {column} > %s"
             params.append(value)
+        elif operator == "lt":
+            sql += f" AND {column} < %s"
+            params.append(value)
+        elif operator == "gte":
+            sql += f" AND {column} >= %s"
+            params.append(value)
+        elif operator == "lte":
+            sql += f" AND {column} <= %s"
+            params.append(value)
         else:
             return JsonResponse({"error": "Invalid operator"}, status=400)
         
